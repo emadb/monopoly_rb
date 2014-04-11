@@ -18,15 +18,18 @@ describe Game do
     expect { Game.new(p,p,p,p,p,p,p,p,p) }.to raise_error
   end
 
-  #Create a game with two players named Horse and Car. Within creating 100 games, both orders [Horse, Car] and [car, horse] occur.
   it "creates a game with 2 players. Within 100 run both orders should occur" do
     horse = Player.new('horse')
     car = Player.new('car')
+    car_horse = false
+    horse_car = false
     100.times do 
-      Game.new(horse, car)
-        car_horse &= Game.players == [car, horse]
-        horse_car &= Game.players == [horse, car]
+      game = Game.new(horse, car)
+        car_horse |= game.players == [car, horse]
+        horse_car |= game.players == [horse, car]
     end
+    expect(car_horse).to be_true
+    expect(horse_car).to be_true
   end
 
 end
