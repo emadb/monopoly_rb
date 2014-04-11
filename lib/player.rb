@@ -1,5 +1,5 @@
 class Player
-  def initialize(starting_position)
+  def initialize(name, starting_position = 0)
     @position = starting_position
   end
 
