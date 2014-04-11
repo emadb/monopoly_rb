@@ -1,6 +1,7 @@
 class Game
-  def initialize(dice, *players)
+  def initialize(dice, boxes, *players)
     @dice = dice
+    @boxes = boxes
     if players.length < 2 || players.length > 8
       raise
     end
