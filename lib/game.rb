@@ -14,8 +14,11 @@ class Game
 
   def play_turn
     @players.each do |p|
-      boxes = @dice.rolls
-      p.advance(boxes)
+      p.advance(@dice.rolls)
+      #boxes.process_player p
+      if p.position == @boxes.index('go') + 1
+        p.add_money(200)
+      end
     end
   end
 
