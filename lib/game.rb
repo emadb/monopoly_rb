@@ -1,7 +1,7 @@
 class Game
-  def initialize(dice, boxes, *players)
+  def initialize(dice, spaces, *players)
     @dice = dice
-    @boxes = boxes
+    @spaces = spaces
     if players.length < 2 || players.length > 8
       raise
     end
@@ -15,10 +15,7 @@ class Game
   def play_turn
     @players.each do |p|
       p.advance(@dice.rolls)
-      #boxes.process_player p
-      if p.position == @boxes.index('go') + 1
-        p.add_money(200)
-      end
+      @spaces.landed_by p
     end
   end
 
