@@ -43,7 +43,7 @@ describe Game do
 
   it "creates a game and play a turn. Players should move" do
     dice = double('dice')
-    dice.stub(:rolls => 7)
+    dice.stub(:roll => 7)
     horse = Player.new('horse')
     car = Player.new('car')
 
@@ -55,7 +55,7 @@ describe Game do
 
   it "creates a game and play a complete game. Players should move 20 times" do
     dice = double('dice')
-    dice.stub(:rolls => 1)
+    dice.stub(:roll => 1)
     horse = Player.new('horse')
     car = Player.new('car')
     game = Game.new(dice, @spaces, horse, car)
@@ -66,7 +66,7 @@ describe Game do
 
   it "During a turn a Player lands on Go and their balance increases by $200." do
     dice = double('dice')
-    dice.stub(:rolls => 3)
+    dice.stub(:roll => 3)
     horse = Player.new('horse')
     car = Player.new('car', starting_position:37)
     

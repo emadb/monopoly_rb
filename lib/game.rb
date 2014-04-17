@@ -14,7 +14,7 @@ class Game
 
   def play_turn
     @players.each do |p|
-      p.advance(@dice.rolls)
+      p.advance(@dice.roll)
       @spaces.landed_by p
     end
   end
