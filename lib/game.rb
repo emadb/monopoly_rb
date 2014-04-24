@@ -9,7 +9,7 @@ class Game
   end
 
   def players
-    @players 
+    @players
   end
 
   def play_turn
