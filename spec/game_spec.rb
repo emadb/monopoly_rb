@@ -73,7 +73,17 @@ describe Game do
     game = Game.new(dice, @spaces, horse, car)
     game.play_turn
     expect(car.balance).to eq(200)
-
   end
+
+  # it "During a turn a Player pass over Go and their balance increases by $200." do
+  #   dice = double('dice')
+  #   dice.stub(:roll => 10)
+  #   horse = Player.new('horse')
+  #   car = Player.new('car', starting_position:37)
+    
+  #   game = Game.new(dice, @spaces, horse, car)
+  #   game.play_turn
+  #   expect(car.balance).to eq(200)
+  # end
 
 end

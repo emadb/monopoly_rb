@@ -1,4 +1,6 @@
 class Game
+  attr_reader :players
+
   def initialize(dice, spaces, *players)
     @dice = dice
     @spaces = spaces
@@ -8,10 +10,7 @@ class Game
     @players = players.shuffle
   end
 
-  def players
-    @players
-  end
-
+  # TODO: move this to the Player class
   def play_turn
     @players.each do |p|
       p.advance(@dice.roll)
