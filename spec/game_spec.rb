@@ -72,18 +72,40 @@ describe Game do
     
     game = Game.new(dice, @spaces, horse, car)
     game.play_turn
+    expect(car.balance).to eq(400)
+  end
+
+  it "During a turn a Player pass over Go and their balance increases by $200." do
+    dice = double('dice')
+    dice.stub(:roll => 10)
+    horse = Player.new('horse', starting_position:1)
+    car = Player.new('car', starting_position:37)
+    
+    game = Game.new(dice, @spaces, horse, car)
+    game.play_turn
     expect(car.balance).to eq(200)
   end
 
-  # it "During a turn a Player pass over Go and their balance increases by $200." do
-  #   dice = double('dice')
-  #   dice.stub(:roll => 10)
-  #   horse = Player.new('horse')
-  #   car = Player.new('car', starting_position:37)
+  it "During a turn a Player pass over normal spaces their balance doesn't change." do
+    dice = double('dice')
+    dice.stub(:roll => 10)
+    horse = Player.new('horse', starting_position:1)
+    car = Player.new('car', starting_position:3)
     
-  #   game = Game.new(dice, @spaces, horse, car)
-  #   game.play_turn
-  #   expect(car.balance).to eq(200)
-  # end
+    game = Game.new(dice, @spaces, horse, car)
+    game.play_turn
+    expect(car.balance).to eq(0)
+  end
+
+    it "Player starts on Go spaces their balance doesn't change." do
+    dice = double('dice')
+    dice.stub(:roll => 10)
+    horse = Player.new('horse', starting_position:1)
+    car = Player.new('car', starting_position:0)
+    
+    game = Game.new(dice, @spaces, horse, car)
+    game.play_turn
+    expect(car.balance).to eq(0)
+  end
 
 end

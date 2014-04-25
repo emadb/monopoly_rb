@@ -19,4 +19,10 @@ describe Player do
     player.add_money(10)
     expect(player.balance).to eq(10)
   end
+
+  it "goto_next_space should advance of 1 space" do
+    player = Player.new('horse')
+    player.goto_next_space
+    expect(player.position).to eq(1)
+  end
 end
