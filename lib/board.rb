@@ -1,4 +1,4 @@
-class Spaces
+class Board
   def initialize (space_list)
     @space_list = space_list
   end

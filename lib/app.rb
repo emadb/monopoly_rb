@@ -1,7 +1,7 @@
 require './lib/player'
 require './lib/dice'
 require './lib/go_space'
-require './lib/spaces'
+require './lib/board'
 require './lib/game'
 
 
@@ -11,10 +11,10 @@ space_list = [GoSpace.new]
 39.times do
   space_list << NormalSpace.new
 end
-spaces = Spaces.new(space_list)
+board = Board.new(space_list)
 dice = Dice.new(Die.new(6),Die.new(6))
 
-game = Game.new(dice, spaces, horse, car)
+game = Game.new(dice, board, horse, car)
 
 10.times do |i|
   puts "turn: #{i}"

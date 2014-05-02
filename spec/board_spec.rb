@@ -1,18 +1,18 @@
 require 'spec_helper'
-require_relative '../lib/spaces'
+require_relative '../lib/board'
 
-describe Spaces do
+describe Board do
   before :each do
     @space = double('go_space')
-    @space_list = [nil, @space, nil]
+    @board = [nil, @space, nil]
   end
 
   it "player enters a space" do
     horse = Player.new('horse', starting_position:1)
-    spaces = Spaces.new(@space_list)
+    board = Board.new(@board)
     @space.should_receive(:landed_by).with(horse)
     
-    spaces.landed_by(horse)
+    board.landed_by(horse)
   end
 
 end

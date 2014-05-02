@@ -8,23 +8,23 @@ describe Game do
     39.times do
       space_list << NormalSpace.new
     end
-    @spaces = Spaces.new(space_list)
+    @board = Board.new(space_list)
   end
 
   it "creates a game with two players named Horse and Car." do
     horse = Player.new('horse')
     car = Player.new('car')
-    game = Game.new(nil, @spaces, horse, car)  
+    game = Game.new(nil, @board, horse, car)  
   end
 
   it "creates a game with less than 2 players fails" do
     horse = Player.new('horse')
-    expect { Game.new(nil, @spaces, horse) }.to raise_error
+    expect { Game.new(nil, @board, horse) }.to raise_error
   end
 
   it "creates a game with more than 8 players fails" do
     p = Player.new('test')
-    expect { Game.new(nil, @spaces, p,p,p,p,p,p,p,p,p) }.to raise_error
+    expect { Game.new(nil, @board, p,p,p,p,p,p,p,p,p) }.to raise_error
   end
 
   it "creates a game with 2 players. Within 100 run both orders should occur" do
@@ -33,7 +33,7 @@ describe Game do
     car_horse = false
     horse_car = false
     100.times do 
-      game = Game.new(nil, @spaces, horse, car)
+      game = Game.new(nil, @board, horse, car)
       car_horse |= game.players == [car, horse]
       horse_car |= game.players == [horse, car]
     end
@@ -47,7 +47,7 @@ describe Game do
     horse = Player.new('horse')
     car = Player.new('car')
 
-    game = Game.new(dice, @spaces, horse, car)
+    game = Game.new(dice, @board, horse, car)
     game.play_turn
     expect(horse.position).not_to eq(0)
     expect(car.position).not_to eq(0)
@@ -58,7 +58,7 @@ describe Game do
     dice.stub(:roll => 1)
     horse = Player.new('horse')
     car = Player.new('car')
-    game = Game.new(dice, @spaces, horse, car)
+    game = Game.new(dice, @board, horse, car)
     game.play_game(20)
     expect(horse.position).to eq(20)
     expect(car.position).to eq(20)
@@ -70,7 +70,7 @@ describe Game do
     horse = Player.new('horse')
     car = Player.new('car', starting_position:37)
     
-    game = Game.new(dice, @spaces, horse, car)
+    game = Game.new(dice, @board, horse, car)
     game.play_turn
     expect(car.balance).to eq(400)
   end
@@ -81,29 +81,29 @@ describe Game do
     horse = Player.new('horse', starting_position:1)
     car = Player.new('car', starting_position:37)
     
-    game = Game.new(dice, @spaces, horse, car)
+    game = Game.new(dice, @board, horse, car)
     game.play_turn
     expect(car.balance).to eq(200)
   end
 
-  it "During a turn a Player pass over normal spaces their balance doesn't change." do
+  it "During a turn a Player pass over normal board their balance doesn't change." do
     dice = double('dice')
     dice.stub(:roll => 10)
     horse = Player.new('horse', starting_position:1)
     car = Player.new('car', starting_position:3)
     
-    game = Game.new(dice, @spaces, horse, car)
+    game = Game.new(dice, @board, horse, car)
     game.play_turn
     expect(car.balance).to eq(0)
   end
 
-    it "Player starts on Go spaces their balance doesn't change." do
+    it "Player starts on Go board their balance doesn't change." do
     dice = double('dice')
     dice.stub(:roll => 10)
     horse = Player.new('horse', starting_position:1)
     car = Player.new('car', starting_position:0)
     
-    game = Game.new(dice, @spaces, horse, car)
+    game = Game.new(dice, @board, horse, car)
     game.play_turn
     expect(car.balance).to eq(0)
   end

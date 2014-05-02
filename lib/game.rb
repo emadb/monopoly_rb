@@ -1,9 +1,9 @@
 class Game
   attr_reader :players
 
-  def initialize(dice, spaces, *players)
+  def initialize(dice, board, *players)
     @dice = dice
-    @spaces = spaces
+    @board = board
     if players.length < 2 || players.length > 8
       raise
     end
@@ -15,14 +15,14 @@ class Game
     @players.each do |p|
       dice = @dice.roll
       move_player p, dice
-      @spaces.landed_by p
+      @board.landed_by p
     end
   end
 
   def move_player(player, dice)
     dice.times do
       player.goto_next_space
-      @spaces.entered_by player
+      @board.entered_by player
     end
   end
 
