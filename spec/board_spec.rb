@@ -10,7 +10,7 @@ describe Board do
   it "player enters a space" do
     horse = Player.new('horse', starting_position:1)
     board = Board.new(@board)
-    @space.should_receive(:landed_by).with(horse)
+    expect(@space).to receive(:landed_by).with(horse)
     
     board.landed_by(horse)
   end

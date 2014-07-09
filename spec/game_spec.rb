@@ -37,13 +37,13 @@ describe Game do
       car_horse |= game.players == [car, horse]
       horse_car |= game.players == [horse, car]
     end
-    expect(car_horse).to be_true
-    expect(horse_car).to be_true
+    expect(car_horse).to be_truthy
+    expect(horse_car).to be_truthy
   end
 
   it "creates a game and play a turn. Players should move" do
     dice = double('dice')
-    dice.stub(:roll => 7)
+    allow(dice).to receive(:roll) { 7 }
     horse = Player.new('horse')
     car = Player.new('car')
 
@@ -55,7 +55,7 @@ describe Game do
 
   it "creates a game and play a complete game. Players should move 20 times" do
     dice = double('dice')
-    dice.stub(:roll => 1)
+    allow(dice).to receive(:roll) { 1 }
     horse = Player.new('horse')
     car = Player.new('car')
     game = Game.new(dice, @board, horse, car)
@@ -66,7 +66,7 @@ describe Game do
 
   it "During a turn a Player lands on Go and their balance increases by $200." do
     dice = double('dice')
-    dice.stub(:roll => 3)
+    allow(dice).to receive(:roll) { 3 }
     horse = Player.new('horse')
     car = Player.new('car', starting_position:37)
     
@@ -77,7 +77,7 @@ describe Game do
 
   it "During a turn a Player pass over Go and their balance increases by $200." do
     dice = double('dice')
-    dice.stub(:roll => 10)
+    allow(dice).to receive(:roll) { 10 }
     horse = Player.new('horse', starting_position:1)
     car = Player.new('car', starting_position:37)
     
@@ -88,7 +88,7 @@ describe Game do
 
   it "During a turn a Player pass over normal board their balance doesn't change." do
     dice = double('dice')
-    dice.stub(:roll => 10)
+    allow(dice).to receive(:roll) { 10 }
     horse = Player.new('horse', starting_position:1)
     car = Player.new('car', starting_position:3)
     
@@ -99,7 +99,7 @@ describe Game do
 
     it "Player starts on Go board their balance doesn't change." do
     dice = double('dice')
-    dice.stub(:roll => 10)
+    allow(dice).to receive(:roll) { 10 }
     horse = Player.new('horse', starting_position:1)
     car = Player.new('car', starting_position:0)
     
